@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && npx wrangler pages deploy dist/ --project-name divinatory-tarot --branch main"
   },
   "devDependencies": {
     "playwright": "^1.60.0",
