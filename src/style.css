@@ -1,0 +1,319 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #1a1025;
+  --surface: #261a38;
+  --surface2: #321f4a;
+  --accent: #c89fff;
+  --accent2: #f0c060;
+  --text: #e8dff8;
+  --text-muted: #9b8cba;
+  --upright: #4a9b6f;
+  --reversed: #9b4a4a;
+  --radius: 10px;
+  --font: system-ui, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.65;
+  min-height: 100dvh;
+}
+
+#app {
+  min-height: 100dvh;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+/* Header */
+.site-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.site-header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+/* Search */
+.search-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+#search {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font);
+  background: var(--surface);
+  color: var(--text);
+  border: 1.5px solid var(--surface2);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#search:focus {
+  border-color: var(--accent);
+}
+
+#search::placeholder {
+  color: var(--text-muted);
+}
+
+/* Suggestions dropdown */
+.suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1.5px solid var(--surface2);
+  border-radius: var(--radius);
+  list-style: none;
+  z-index: 100;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.suggestions li + li {
+  border-top: 1px solid var(--surface2);
+}
+
+.suggestions button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  transition: background 0.1s;
+}
+
+.suggestions button span {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.suggestions button:hover,
+.suggestions button:focus {
+  background: var(--surface2);
+  outline: none;
+}
+
+/* History */
+.history {
+  margin-bottom: 1.5rem;
+}
+
+.history-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.history-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.history-item {
+  background: var(--surface);
+  border: 1px solid var(--surface2);
+  border-radius: 99px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+  display: flex;
+  gap: 0.3rem;
+  align-items: baseline;
+}
+
+.history-item span {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.history-item:hover {
+  background: var(--surface2);
+  border-color: var(--accent);
+}
+
+/* Card detail */
+.card-detail {
+  background: var(--surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid var(--surface2);
+}
+
+.card-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent2);
+  min-width: 2.5rem;
+  text-align: center;
+  line-height: 1;
+}
+
+.card-name-ja {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.card-name-en {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.1rem;
+}
+
+/* Meaning sections */
+.meaning {
+  padding: 1rem 1.25rem;
+}
+
+.meaning + .meaning {
+  border-top: 1px solid var(--surface2);
+}
+
+.meaning h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.upright h3 {
+  color: var(--upright);
+}
+
+.reversed h3 {
+  color: var(--reversed);
+}
+
+
+.keywords {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.detail-ja {
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+}
+
+.detail-en {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Vocabulary */
+.vocabulary-section {
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--surface2);
+}
+
+.vocabulary-section h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.vocab-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.vocab-item {
+  background: var(--surface2);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.vocab-en {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Ruby / furigana — hidden by default, shown on tap */
+ruby {
+  ruby-align: center;
+  cursor: pointer;
+}
+
+rt {
+  font-size: 0.55em;
+  color: transparent;
+  transition: color 0.15s;
+}
+
+ruby.show-furigana rt {
+  color: var(--text-muted);
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .card-number {
+    font-size: 1.5rem;
+    min-width: 2rem;
+  }
+
+  .card-name-ja {
+    font-size: 1.3rem;
+  }
+}

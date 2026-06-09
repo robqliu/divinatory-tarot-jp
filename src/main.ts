@@ -1,0 +1,216 @@
+import Fuse from "fuse.js";
+import { cards, type Card } from "./cards";
+import "./style.css";
+
+const HISTORY_KEY = "tarot_history";
+const HISTORY_MAX = 10;
+
+function getHistory(): string[] {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+function pushHistory(cardId: string) {
+  const history = getHistory().filter((id) => id !== cardId);
+  history.unshift(cardId);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, HISTORY_MAX)));
+}
+
+const searchIndex = cards.flatMap((card) => [
+  { card, term: card.name },
+  { card, term: card.name_ja },
+  ...card.aliases.map((a) => ({ card, term: a })),
+]);
+
+const fuse = new Fuse(searchIndex, {
+  keys: ["term"],
+  threshold: 0.35,
+  includeScore: true,
+});
+
+function searchCards(query: string): Card[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+
+  // Exact alias match first
+  for (const { card } of searchIndex) {
+    if (card.aliases.some((a) => a.toLowerCase() === q)) return [card];
+  }
+
+  const results = fuse.search(q);
+  const seen = new Set<string>();
+  return results
+    .map((r) => r.item.card)
+    .filter((c) => {
+      if (seen.has(c.id)) return false;
+      seen.add(c.id);
+      return true;
+    });
+}
+
+function renderVocabulary(vocab: Card["vocabulary"]): string {
+  return vocab
+    .map(
+      (v) =>
+        `<span class="vocab-item"><ruby>${v.word}<rt>${v.reading}</rt></ruby> <span class="vocab-en">${v.en}</span></span>`
+    )
+    .join("");
+}
+
+function renderCard(card: Card): string {
+  return `
+    <article class="card-detail">
+      <header class="card-header">
+        <span class="card-number">${card.number !== null ? card.number : "—"}</span>
+        <div class="card-titles">
+          <h2 class="card-name-ja">${card.name_ja}</h2>
+          <p class="card-name-en">${card.name}</p>
+        </div>
+      </header>
+
+      <section class="meaning upright">
+        <h3>正位置</h3>
+        <p class="keywords">${card.upright.keywords_ja}</p>
+        <p class="detail-ja">${card.upright.detail_ja}</p>
+        <p class="detail-en">${card.upright.detail_en}</p>
+      </section>
+
+      <section class="meaning reversed">
+        <h3>逆位置</h3>
+        <p class="keywords">${card.reversed.keywords_ja}</p>
+        <p class="detail-ja">${card.reversed.detail_ja}</p>
+        <p class="detail-en">${card.reversed.detail_en}</p>
+      </section>
+
+      <section class="vocabulary-section">
+        <h3>語彙</h3>
+        <div class="vocab-list">${renderVocabulary(card.vocabulary)}</div>
+      </section>
+    </article>
+  `;
+}
+
+function renderHistory(): string {
+  const history = getHistory();
+  if (history.length === 0) return "";
+
+  const items = history
+    .map((id) => {
+      const card = cards.find((c) => c.id === id);
+      if (!card) return "";
+      return `<button class="history-item" data-id="${card.id}">${card.name_ja} <span>${card.name}</span></button>`;
+    })
+    .filter(Boolean)
+    .join("");
+
+  return `<div class="history"><p class="history-label">最近の検索</p><div class="history-items">${items}</div></div>`;
+}
+
+function showCard(card: Card, addToHistory = true) {
+  if (addToHistory) pushHistory(card.id);
+  resultsEl.innerHTML = renderCard(card);
+  historyEl.innerHTML = renderHistory();
+  bindHistoryButtons();
+  resultsEl.querySelectorAll<HTMLElement>("ruby").forEach((ruby) => {
+    ruby.addEventListener("click", () => ruby.classList.toggle("show-furigana"));
+  });
+}
+
+function bindHistoryButtons() {
+  historyEl.querySelectorAll<HTMLButtonElement>(".history-item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = cards.find((c) => c.id === btn.dataset.id);
+      if (card) showCard(card, false);
+    });
+  });
+}
+
+// DOM
+const app = document.querySelector<HTMLDivElement>("#app")!;
+app.innerHTML = `
+  <div class="container">
+    <header class="site-header">
+      <h1>タロット辞典</h1>
+    </header>
+    <div class="search-wrapper">
+      <input
+        type="search"
+        id="search"
+        placeholder="カード名を検索… (例: 0, fool, 愚者, 17)"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+      <ul id="suggestions" class="suggestions" hidden></ul>
+    </div>
+    <div id="history"></div>
+    <div id="results"></div>
+  </div>
+`;
+
+const searchEl = app.querySelector<HTMLInputElement>("#search")!;
+const suggestionsEl = app.querySelector<HTMLUListElement>("#suggestions")!;
+const resultsEl = app.querySelector<HTMLDivElement>("#results")!;
+const historyEl = app.querySelector<HTMLDivElement>("#history")!;
+
+historyEl.innerHTML = renderHistory();
+bindHistoryButtons();
+
+searchEl.addEventListener("input", () => {
+  const q = searchEl.value;
+  if (!q.trim()) {
+    suggestionsEl.hidden = true;
+    suggestionsEl.innerHTML = "";
+    return;
+  }
+
+  const results = searchCards(q);
+  if (results.length === 0) {
+    suggestionsEl.hidden = true;
+    return;
+  }
+
+  suggestionsEl.innerHTML = results
+    .slice(0, 6)
+    .map(
+      (c) =>
+        `<li><button data-id="${c.id}">${c.name_ja} <span>${c.name}</span></button></li>`
+    )
+    .join("");
+  suggestionsEl.hidden = false;
+
+  suggestionsEl.querySelectorAll<HTMLButtonElement>("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = cards.find((c) => c.id === btn.dataset.id);
+      if (card) {
+        searchEl.value = "";
+        suggestionsEl.hidden = true;
+        showCard(card);
+      }
+    });
+  });
+});
+
+searchEl.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    suggestionsEl.hidden = true;
+  }
+  if (e.key === "Enter") {
+    const q = searchEl.value;
+    const results = searchCards(q);
+    if (results.length > 0) {
+      searchEl.value = "";
+      suggestionsEl.hidden = true;
+      showCard(results[0]);
+    }
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (!app.querySelector(".search-wrapper")!.contains(e.target as Node)) {
+    suggestionsEl.hidden = true;
+  }
+});
