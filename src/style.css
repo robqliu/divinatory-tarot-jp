@@ -253,58 +253,6 @@ body {
   font-style: italic;
 }
 
-/* Vocabulary */
-.vocabulary-section {
-  padding: 1rem 1.25rem 1.25rem;
-  border-top: 1px solid var(--surface2);
-}
-
-.vocabulary-section h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 0.6rem;
-  display: flex;
-  align-items: baseline;
-  gap: 0.4rem;
-}
-
-.vocab-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.vocab-item {
-  background: var(--surface2);
-  border-radius: 6px;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.9rem;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4rem;
-}
-
-.vocab-en {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-/* Ruby / furigana — hidden by default, shown on tap */
-ruby {
-  ruby-align: center;
-  cursor: pointer;
-}
-
-rt {
-  font-size: 0.55em;
-  color: transparent;
-  transition: color 0.15s;
-}
-
-ruby.show-furigana rt {
-  color: var(--text-muted);
-}
 
 /* Mobile tweaks */
 @media (max-width: 480px) {

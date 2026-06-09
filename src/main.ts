@@ -51,13 +51,8 @@ function searchCards(query: string): Card[] {
     });
 }
 
-function renderVocabulary(vocab: Card["vocabulary"]): string {
-  return vocab
-    .map(
-      (v) =>
-        `<span class="vocab-item"><ruby>${v.word}<rt>${v.reading}</rt></ruby> <span class="vocab-en">${v.en}</span></span>`
-    )
-    .join("");
+function stripRuby(html: string): string {
+  return html.replace(/<rt>[^<]*<\/rt>/g, "").replace(/<\/?ruby>/g, "");
 }
 
 function renderCard(card: Card): string {
@@ -73,21 +68,16 @@ function renderCard(card: Card): string {
 
       <section class="meaning upright">
         <h3>正位置</h3>
-        <p class="keywords">${card.upright.keywords_ja}</p>
-        <p class="detail-ja">${card.upright.detail_ja}</p>
+        <p class="keywords">${stripRuby(card.upright.keywords_ja)}</p>
+        <p class="detail-ja">${stripRuby(card.upright.detail_ja)}</p>
         <p class="detail-en">${card.upright.detail_en}</p>
       </section>
 
       <section class="meaning reversed">
         <h3>逆位置</h3>
-        <p class="keywords">${card.reversed.keywords_ja}</p>
-        <p class="detail-ja">${card.reversed.detail_ja}</p>
+        <p class="keywords">${stripRuby(card.reversed.keywords_ja)}</p>
+        <p class="detail-ja">${stripRuby(card.reversed.detail_ja)}</p>
         <p class="detail-en">${card.reversed.detail_en}</p>
-      </section>
-
-      <section class="vocabulary-section">
-        <h3>語彙</h3>
-        <div class="vocab-list">${renderVocabulary(card.vocabulary)}</div>
       </section>
     </article>
   `;
@@ -114,9 +104,7 @@ function showCard(card: Card, addToHistory = true) {
   resultsEl.innerHTML = renderCard(card);
   historyEl.innerHTML = renderHistory();
   bindHistoryButtons();
-  resultsEl.querySelectorAll<HTMLElement>("ruby").forEach((ruby) => {
-    ruby.addEventListener("click", () => ruby.classList.toggle("show-furigana"));
-  });
+
 }
 
 function bindHistoryButtons() {

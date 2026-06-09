@@ -1,9 +1,3 @@
-export interface Vocabulary {
-  word: string;
-  reading: string;
-  en: string;
-}
-
 export interface CardMeaning {
   keywords_ja: string;
   detail_ja: string;
@@ -18,7 +12,6 @@ export interface Card {
   aliases: string[];
   upright: CardMeaning;
   reversed: CardMeaning;
-  vocabulary: Vocabulary[];
 }
 
 export const cards: Card[] = [
@@ -38,15 +31,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>準備<rt>じゅんび</rt></ruby>なしの<ruby>無謀<rt>むぼう</rt></ruby>な<ruby>行動<rt>こうどう</rt></ruby>や、<ruby>無責任<rt>むせきにん</rt></ruby>さを<ruby>警告<rt>けいこく</rt></ruby>します。<ruby>リスク<rt>りすく</rt></ruby>を<ruby>軽視<rt>けいし</rt></ruby>している<ruby>状態<rt>じょうたい</rt></ruby>かもしれません。",
       detail_en: "Recklessness, risk-taking without preparation, naivety leading to poor decisions.",
     },
-    vocabulary: [
-      { word: "始まり", reading: "はじまり", en: "beginning" },
-      { word: "自由", reading: "じゆう", en: "freedom" },
-      { word: "冒険", reading: "ぼうけん", en: "adventure" },
-      { word: "可能性", reading: "かのうせい", en: "possibility" },
-      { word: "純粋", reading: "じゅんすい", en: "pure/innocent" },
-      { word: "無謀", reading: "むぼう", en: "recklessness" },
-      { word: "無責任", reading: "むせきにん", en: "irresponsibility" },
-    ],
   },
   {
     id: "magician",
@@ -64,15 +48,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>才能<rt>さいのう</rt></ruby>を<ruby>悪<rt>わる</rt></ruby>い<ruby>目的<rt>もくてき</rt></ruby>に<ruby>使<rt>つか</rt></ruby>ったり、<ruby>力<rt>ちから</rt></ruby>を<ruby>発揮<rt>はっき</rt></ruby>できていない<ruby>状態<rt>じょうたい</rt></ruby>を<ruby>表<rt>あらわ</rt></ruby>します。",
       detail_en: "Manipulation, poor planning, untapped talents going to waste.",
     },
-    vocabulary: [
-      { word: "意志", reading: "いし", en: "will/intention" },
-      { word: "技術", reading: "ぎじゅつ", en: "skill/technique" },
-      { word: "創造力", reading: "そうぞうりょく", en: "creativity" },
-      { word: "現実", reading: "げんじつ", en: "reality" },
-      { word: "才能", reading: "さいのう", en: "talent" },
-      { word: "操作", reading: "そうさ", en: "manipulation" },
-      { word: "潜在能力", reading: "せんざいのうりょく", en: "latent ability/potential" },
-    ],
   },
   {
     id: "high-priestess",
@@ -90,13 +65,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>自分<rt>じぶん</rt></ruby>の<ruby>直感<rt>ちょっかん</rt></ruby>を<ruby>信<rt>しん</rt></ruby>じられず、<ruby>秘密<rt>ひみつ</rt></ruby>が<ruby>隠<rt>かく</rt></ruby>されている<ruby>状態<rt>じょうたい</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Secrets, disconnected from intuition, information withheld.",
     },
-    vocabulary: [
-      { word: "直感", reading: "ちょっかん", en: "intuition" },
-      { word: "知恵", reading: "ちえ", en: "wisdom" },
-      { word: "潜在意識", reading: "せんざいいしき", en: "subconscious" },
-      { word: "神秘", reading: "しんぴ", en: "mystery" },
-      { word: "秘密", reading: "ひみつ", en: "secret" },
-    ],
   },
   {
     id: "empress",
@@ -114,15 +82,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>過<rt>か</rt></ruby>ぎた<ruby>依存<rt>いぞん</rt></ruby>や<ruby>過保護<rt>かほご</rt></ruby>、または<ruby>自分<rt>じぶん</rt></ruby>の<ruby>創造力<rt>そうぞうりょく</rt></ruby>が<ruby>発揮<rt>はっき</rt></ruby>できていない<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Creative block, dependence, smothering, lack of growth.",
     },
-    vocabulary: [
-      { word: "豊かさ", reading: "ゆたかさ", en: "abundance/richness" },
-      { word: "母性", reading: "ぼせい", en: "motherhood/maternity" },
-      { word: "自然", reading: "しぜん", en: "nature" },
-      { word: "愛情", reading: "あいじょう", en: "affection/love" },
-      { word: "創造", reading: "そうぞう", en: "creation" },
-      { word: "依存", reading: "いぞん", en: "dependence" },
-      { word: "過保護", reading: "かほご", en: "overprotection" },
-    ],
   },
   {
     id: "emperor",
@@ -140,15 +99,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>権力<rt>けんりょく</rt></ruby>の<ruby>乱用<rt>らんよう</rt></ruby>や<ruby>頑固<rt>がんこ</rt></ruby>さ、<ruby>支配的<rt>しはいてき</rt></ruby>な<ruby>態度<rt>たいど</rt></ruby>を<ruby>警告<rt>けいこく</rt></ruby>します。",
       detail_en: "Domination, excessive control, rigidity, inflexibility.",
     },
-    vocabulary: [
-      { word: "権威", reading: "けんい", en: "authority" },
-      { word: "秩序", reading: "ちつじょ", en: "order" },
-      { word: "規律", reading: "きりつ", en: "discipline" },
-      { word: "安定", reading: "あんてい", en: "stability" },
-      { word: "構造", reading: "こうぞう", en: "structure" },
-      { word: "支配", reading: "しはい", en: "control/domination" },
-      { word: "柔軟性", reading: "じゅうなんせい", en: "flexibility" },
-    ],
   },
   {
     id: "hierophant",
@@ -166,15 +116,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>既存<rt>きぞん</rt></ruby>の<ruby>ルール<rt>るーる</rt></ruby>や<ruby>制度<rt>せいど</rt></ruby>への<ruby>反抗<rt>はんこう</rt></ruby>、<ruby>自分<rt>じぶん</rt></ruby>だけの<ruby>道<rt>みち</rt></ruby>を<ruby>歩<rt>ある</rt></ruby>む<ruby>姿勢<rt>しせい</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Personal beliefs, freedom, challenging the status quo, unconventional.",
     },
-    vocabulary: [
-      { word: "伝統", reading: "でんとう", en: "tradition" },
-      { word: "信念", reading: "しんねん", en: "belief/conviction" },
-      { word: "教育", reading: "きょういく", en: "education" },
-      { word: "価値観", reading: "かちかん", en: "values" },
-      { word: "規範", reading: "きはん", en: "norms/standards" },
-      { word: "反抗", reading: "はんこう", en: "rebellion" },
-      { word: "慣習", reading: "かんしゅう", en: "customs/convention" },
-    ],
   },
   {
     id: "lovers",
@@ -192,15 +133,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>関係<rt>かんけい</rt></ruby>の<ruby>不調和<rt>ふちょうわ</rt></ruby>や<ruby>価値観<rt>かちかん</rt></ruby>のずれ、<ruby>誘惑<rt>ゆうわく</rt></ruby>に<ruby>負<rt>ま</rt></ruby>けた<ruby>選択<rt>せんたく</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Disharmony, imbalance, misalignment of values, poor choices.",
     },
-    vocabulary: [
-      { word: "愛", reading: "あい", en: "love" },
-      { word: "選択", reading: "せんたく", en: "choice" },
-      { word: "調和", reading: "ちょうわ", en: "harmony" },
-      { word: "絆", reading: "きずな", en: "bond/tie" },
-      { word: "決断", reading: "けつだん", en: "decision" },
-      { word: "誘惑", reading: "ゆうわく", en: "temptation" },
-      { word: "不調和", reading: "ふちょうわ", en: "disharmony" },
-    ],
   },
   {
     id: "chariot",
@@ -218,14 +150,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>感情<rt>かんじょう</rt></ruby>に<ruby>流<rt>なが</rt></ruby>され、<ruby>目標<rt>もくひょう</rt></ruby>を<ruby>見失<rt>みうしな</rt></ruby>った<ruby>状態<rt>じょうたい</rt></ruby>を<ruby>表<rt>あらわ</rt></ruby>します。",
       detail_en: "Lack of control, aggression, obstacles, lack of direction.",
     },
-    vocabulary: [
-      { word: "勝利", reading: "しょうり", en: "victory" },
-      { word: "意志", reading: "いし", en: "will/determination" },
-      { word: "自制心", reading: "じせいしん", en: "self-control" },
-      { word: "困難", reading: "こんなん", en: "difficulty" },
-      { word: "目標", reading: "もくひょう", en: "goal/target" },
-      { word: "喪失", reading: "そうしつ", en: "loss" },
-    ],
   },
   {
     id: "strength",
@@ -243,14 +167,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>内<rt>うち</rt></ruby>なる<ruby>力<rt>ちから</rt></ruby>を<ruby>信<rt>しん</rt></ruby>じられず、<ruby>恐怖<rt>きょうふ</rt></ruby>や<ruby>疑念<rt>ぎねん</rt></ruby>に<ruby>支配<rt>しはい</rt></ruby>されている<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Self-doubt, weakness, lack of confidence, insecurity.",
     },
-    vocabulary: [
-      { word: "勇気", reading: "ゆうき", en: "courage" },
-      { word: "忍耐", reading: "にんたい", en: "patience/endurance" },
-      { word: "穏やか", reading: "おだやか", en: "gentle/calm" },
-      { word: "自信", reading: "じしん", en: "self-confidence" },
-      { word: "恐怖", reading: "きょうふ", en: "fear" },
-      { word: "疑念", reading: "ぎねん", en: "doubt" },
-    ],
   },
   {
     id: "hermit",
@@ -268,13 +184,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>孤立<rt>こりつ</rt></ruby>を<ruby>恐<rt>おそ</rt></ruby>れるか、<ruby>逆<rt>ぎゃく</rt></ruby>に<ruby>必要<rt>ひつよう</rt></ruby>な<ruby>孤独<rt>こどく</rt></ruby>から<ruby>逃<rt>に</rt></ruby>げている<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Isolation, loneliness, withdrawal, rejection of inner guidance.",
     },
-    vocabulary: [
-      { word: "内省", reading: "ないせい", en: "introspection" },
-      { word: "孤独", reading: "こどく", en: "solitude/loneliness" },
-      { word: "探求", reading: "たんきゅう", en: "seeking/quest" },
-      { word: "真実", reading: "しんじつ", en: "truth" },
-      { word: "孤立", reading: "こりつ", en: "isolation" },
-    ],
   },
   {
     id: "wheel-of-fortune",
@@ -292,14 +201,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>変化<rt>へんか</rt></ruby>に<ruby>抵抗<rt>ていこう</rt></ruby>したり、<ruby>悪<rt>わる</rt></ruby>い<ruby>流<rt>なが</rt></ruby>れが<ruby>続<rt>つづ</rt></ruby>いている<ruby>状態<rt>じょうたい</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Bad luck, resistance to change, breaking cycles.",
     },
-    vocabulary: [
-      { word: "運命", reading: "うんめい", en: "fate/destiny" },
-      { word: "転機", reading: "てんき", en: "turning point" },
-      { word: "幸運", reading: "こううん", en: "good luck" },
-      { word: "循環", reading: "じゅんかん", en: "cycle/circulation" },
-      { word: "変化", reading: "へんか", en: "change" },
-      { word: "悪循環", reading: "あくじゅんかん", en: "vicious cycle" },
-    ],
   },
   {
     id: "justice",
@@ -317,15 +218,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>不正直<rt>ふしょうじき</rt></ruby>さや<ruby>不公平<rt>ふこうへい</rt></ruby>な<ruby>状況<rt>じょうきょう</rt></ruby>、<ruby>責任<rt>せきにん</rt></ruby>を<ruby>逃<rt>に</rt></ruby>げようとする<ruby>姿勢<rt>しせい</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Unfairness, lack of accountability, dishonesty.",
     },
-    vocabulary: [
-      { word: "公正", reading: "こうせい", en: "fairness/justice" },
-      { word: "真実", reading: "しんじつ", en: "truth" },
-      { word: "因果応報", reading: "いんがおうほう", en: "karma/cause and effect" },
-      { word: "公平", reading: "こうへい", en: "fair/impartial" },
-      { word: "判断", reading: "はんだん", en: "judgment" },
-      { word: "責任", reading: "せきにん", en: "responsibility" },
-      { word: "不公平", reading: "ふこうへい", en: "unfairness" },
-    ],
   },
   {
     id: "hanged-man",
@@ -343,14 +235,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>無駄<rt>むだ</rt></ruby>な<ruby>犠牲<rt>ぎせい</rt></ruby>を<ruby>払<rt>はら</rt></ruby>ったり、<ruby>前進<rt>ぜんしん</rt></ruby>できずに<ruby>停滞<rt>ていたい</rt></ruby>している<ruby>状況<rt>じょうきょう</rt></ruby>です。",
       detail_en: "Delays, resistance, stalling, futile sacrifice.",
     },
-    vocabulary: [
-      { word: "視点", reading: "してん", en: "perspective/viewpoint" },
-      { word: "停止", reading: "ていし", en: "pause/stop" },
-      { word: "手放す", reading: "てばなす", en: "to let go" },
-      { word: "犠牲", reading: "ぎせい", en: "sacrifice" },
-      { word: "停滞", reading: "ていたい", en: "stagnation" },
-      { word: "気づき", reading: "きづき", en: "realization/insight" },
-    ],
   },
   {
     id: "death",
@@ -368,14 +252,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>必要<rt>ひつよう</rt></ruby>な<ruby>変化<rt>へんか</rt></ruby>に<ruby>抵抗<rt>ていこう</rt></ruby>し、<ruby>過去<rt>かこ</rt></ruby>に<ruby>執着<rt>しゅうちゃく</rt></ruby>している<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Resistance to change, inability to move on, clinging to the past.",
     },
-    vocabulary: [
-      { word: "変容", reading: "へんよう", en: "transformation" },
-      { word: "移行", reading: "いこう", en: "transition" },
-      { word: "終わり", reading: "おわり", en: "ending" },
-      { word: "誕生", reading: "たんじょう", en: "birth" },
-      { word: "執着", reading: "しゅうちゃく", en: "attachment/clinging" },
-      { word: "抵抗", reading: "ていこう", en: "resistance" },
-    ],
   },
   {
     id: "temperance",
@@ -393,14 +269,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>過剰<rt>かじょう</rt></ruby>なものや<ruby>バランス<rt>ばらんす</rt></ruby>の<ruby>崩れ<rt>くずれ</rt></ruby>た<ruby>生活<rt>せいかつ</rt></ruby>、<ruby>極端<rt>きょくたん</rt></ruby>な<ruby>行動<rt>こうどう</rt></ruby>を<ruby>警告<rt>けいこく</rt></ruby>します。",
       detail_en: "Imbalance, excess, lack of long-term vision.",
     },
-    vocabulary: [
-      { word: "節度", reading: "せつど", en: "moderation" },
-      { word: "忍耐", reading: "にんたい", en: "patience" },
-      { word: "調和", reading: "ちょうわ", en: "harmony" },
-      { word: "バランス", reading: "ばらんす", en: "balance" },
-      { word: "極端", reading: "きょくたん", en: "extreme" },
-      { word: "過剰", reading: "かじょう", en: "excess/too much" },
-    ],
   },
   {
     id: "devil",
@@ -418,14 +286,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>依存<rt>いぞん</rt></ruby>や<ruby>束縛<rt>そくばく</rt></ruby>から<ruby>解放<rt>かいほう</rt></ruby>されつつある<ruby>状態<rt>じょうたい</rt></ruby>、または<ruby>そこ<rt>そこ</rt></ruby>から<ruby>抜<rt>ぬ</rt></ruby>け<ruby>出<rt>だ</rt></ruby>す<ruby>可能性<rt>かのうせい</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Releasing limiting beliefs, exploring dark thoughts, detachment.",
     },
-    vocabulary: [
-      { word: "束縛", reading: "そくばく", en: "bondage/restriction" },
-      { word: "依存", reading: "いぞん", en: "dependence/addiction" },
-      { word: "誘惑", reading: "ゆうわく", en: "temptation" },
-      { word: "執着", reading: "しゅうちゃく", en: "attachment" },
-      { word: "解放", reading: "かいほう", en: "liberation/release" },
-      { word: "物質主義", reading: "ぶっしつしゅぎ", en: "materialism" },
-    ],
   },
   {
     id: "tower",
@@ -443,14 +303,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>必要<rt>ひつよう</rt></ruby>な<ruby>変化<rt>へんか</rt></ruby>を<ruby>先延<rt>さきのば</rt></ruby>しにし、<ruby>崩壊<rt>ほうかい</rt></ruby>を<ruby>恐<rt>おそ</rt></ruby>れて<ruby>動<rt>うご</rt></ruby>けない<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Personal transformation, fear of change, averting disaster.",
     },
-    vocabulary: [
-      { word: "崩壊", reading: "ほうかい", en: "collapse/breakdown" },
-      { word: "啓示", reading: "けいじ", en: "revelation" },
-      { word: "突然", reading: "とつぜん", en: "suddenly" },
-      { word: "破壊", reading: "はかい", en: "destruction" },
-      { word: "危機", reading: "きき", en: "crisis" },
-      { word: "先延ばし", reading: "さきのばし", en: "postponement" },
-    ],
   },
   {
     id: "star",
@@ -468,14 +320,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>希望<rt>きぼう</rt></ruby>を<ruby>失<rt>うしな</rt></ruby>い、<ruby>未来<rt>みらい</rt></ruby>への<ruby>信頼<rt>しんらい</rt></ruby>が<ruby>揺<rt>ゆ</rt></ruby>らいでいる<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Lack of faith, despair, self-trust issues, disconnection.",
     },
-    vocabulary: [
-      { word: "希望", reading: "きぼう", en: "hope" },
-      { word: "再生", reading: "さいせい", en: "renewal/regeneration" },
-      { word: "信頼", reading: "しんらい", en: "trust/faith" },
-      { word: "試練", reading: "しれん", en: "trial/ordeal" },
-      { word: "癒し", reading: "いやし", en: "healing" },
-      { word: "絶望", reading: "ぜつぼう", en: "despair" },
-    ],
   },
   {
     id: "moon",
@@ -493,13 +337,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>混乱<rt>こんらん</rt></ruby>や<ruby>幻想<rt>げんそう</rt></ruby>から<ruby>抜<rt>ぬ</rt></ruby>け<ruby>出<rt>だ</rt></ruby>し、<ruby>物事<rt>ものごと</rt></ruby>が<ruby>明<rt>あき</rt></ruby>らかになりつつある<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Release of fear, repressed emotion, inner confusion, clarity emerging.",
     },
-    vocabulary: [
-      { word: "幻想", reading: "げんそう", en: "illusion/fantasy" },
-      { word: "不安", reading: "ふあん", en: "anxiety/unease" },
-      { word: "潜在意識", reading: "せんざいいしき", en: "subconscious" },
-      { word: "混乱", reading: "こんらん", en: "confusion" },
-      { word: "明晰", reading: "めいせき", en: "clarity" },
-    ],
   },
   {
     id: "sun",
@@ -517,14 +354,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>一時的<rt>いちじてき</rt></ruby>に<ruby>輝<rt>かがや</rt></ruby>きが<ruby>陰<rt>かげ</rt></ruby>り、<ruby>内<rt>うち</rt></ruby>なる<ruby>活力<rt>かつりょく</rt></ruby>を<ruby>取<rt>と</rt></ruby>り<ruby>戻<rt>もど</rt></ruby>すことが<ruby>必要<rt>ひつよう</rt></ruby>な<ruby>時期<rt>じき</rt></ruby>です。",
       detail_en: "Inner child, feeling down, overly optimistic.",
     },
-    vocabulary: [
-      { word: "喜び", reading: "よろこび", en: "joy" },
-      { word: "成功", reading: "せいこう", en: "success" },
-      { word: "活力", reading: "かつりょく", en: "vitality/energy" },
-      { word: "楽観", reading: "らっかん", en: "optimism" },
-      { word: "幸福", reading: "こうふく", en: "happiness" },
-      { word: "悲観", reading: "ひかん", en: "pessimism" },
-    ],
   },
   {
     id: "judgement",
@@ -542,13 +371,6 @@ export const cards: Card[] = [
       detail_ja: "<ruby>自分<rt>じぶん</rt></ruby>を<ruby>厳<rt>きび</rt></ruby>しく<ruby>裁<rt>さば</rt></ruby>きすぎたり、<ruby>過去<rt>かこ</rt></ruby>の<ruby>後悔<rt>こうかい</rt></ruby>に<ruby>縛<rt>しば</rt></ruby>られている<ruby>状態<rt>じょうたい</rt></ruby>です。",
       detail_en: "Self-doubt, inner critic, ignoring the call.",
     },
-    vocabulary: [
-      { word: "覚醒", reading: "かくせい", en: "awakening" },
-      { word: "再生", reading: "さいせい", en: "rebirth/regeneration" },
-      { word: "評価", reading: "ひょうか", en: "evaluation/assessment" },
-      { word: "自己批判", reading: "じこひはん", en: "self-criticism" },
-      { word: "後悔", reading: "こうかい", en: "regret" },
-    ],
   },
   {
     id: "world",
@@ -566,13 +388,5 @@ export const cards: Card[] = [
       detail_ja: "<ruby>物事<rt>ものごと</rt></ruby>が<ruby>完全<rt>かんぜん</rt></ruby>に<ruby>解決<rt>かいけつ</rt></ruby>しておらず、<ruby>まだ<rt>まだ</rt></ruby><ruby>課題<rt>かだい</rt></ruby>が<ruby>残<rt>のこ</rt></ruby>っている<ruby>状態<rt>じょうたい</rt></ruby>を<ruby>示<rt>しめ</rt></ruby>します。",
       detail_en: "Incompletion, no closure, carrying baggage.",
     },
-    vocabulary: [
-      { word: "完成", reading: "かんせい", en: "completion" },
-      { word: "達成", reading: "たっせい", en: "achievement" },
-      { word: "統合", reading: "とうごう", en: "integration" },
-      { word: "充実感", reading: "じゅうじつかん", en: "sense of fulfillment" },
-      { word: "未完成", reading: "みかんせい", en: "incomplete" },
-      { word: "課題", reading: "かだい", en: "remaining issue/task" },
-    ],
   },
 ];
