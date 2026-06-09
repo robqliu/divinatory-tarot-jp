@@ -1,5 +1,5 @@
 import Fuse from "fuse.js";
-import { cards, type Card } from "./cards";
+import { cards, cardImageUrl, type Card } from "./cards";
 import "./style.css";
 
 const HISTORY_KEY = "tarot_history";
@@ -56,12 +56,14 @@ function stripRuby(html: string): string {
 }
 
 function renderCard(card: Card): string {
+  const numberLabel = card.number !== null ? `<span class="card-number-inline">（${card.number}）</span>` : "";
+  const imgUrl = cardImageUrl(card);
   return `
     <article class="card-detail">
       <header class="card-header">
-        <span class="card-number">${card.number !== null ? card.number : "—"}</span>
+        <img class="card-thumb" src="${imgUrl}" alt="${card.name}" data-src="${imgUrl}" />
         <div class="card-titles">
-          <h2 class="card-name-ja">${card.name_ja}</h2>
+          <h2 class="card-name-ja">${card.name_ja}${numberLabel}</h2>
           <p class="card-name-en">${card.name}</p>
         </div>
       </header>
@@ -105,6 +107,14 @@ function showCard(card: Card, addToHistory = true) {
   historyEl.innerHTML = renderHistory();
   bindHistoryButtons();
 
+  const thumb = resultsEl.querySelector<HTMLImageElement>(".card-thumb");
+  if (thumb) {
+    thumb.addEventListener("click", () => {
+      lightboxImgEl.src = thumb.dataset.src!;
+      lightboxImgEl.alt = thumb.alt;
+      lightboxEl.hidden = false;
+    });
+  }
 }
 
 function bindHistoryButtons() {
@@ -137,12 +147,23 @@ app.innerHTML = `
     <div id="history"></div>
     <div id="results"></div>
   </div>
+  <div id="lightbox" class="lightbox" hidden>
+    <img id="lightbox-img" src="" alt="" />
+  </div>
 `;
 
 const searchEl = app.querySelector<HTMLInputElement>("#search")!;
 const suggestionsEl = app.querySelector<HTMLUListElement>("#suggestions")!;
 const resultsEl = app.querySelector<HTMLDivElement>("#results")!;
 const historyEl = app.querySelector<HTMLDivElement>("#history")!;
+const lightboxEl = app.querySelector<HTMLDivElement>("#lightbox")!;
+const lightboxImgEl = app.querySelector<HTMLImageElement>("#lightbox-img")!;
+
+lightboxEl.addEventListener("click", () => { lightboxEl.hidden = true; });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !lightboxEl.hidden) lightboxEl.hidden = true;
+});
 
 historyEl.innerHTML = renderHistory();
 bindHistoryButtons();

@@ -14,6 +14,49 @@ export interface Card {
   reversed: CardMeaning;
 }
 
+const WIKIMEDIA = "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/";
+
+const majorFilenames: Record<string, string> = {
+  "fool":             "RWS_Tarot_00_Fool.jpg",
+  "magician":         "RWS_Tarot_01_Magician.jpg",
+  "high-priestess":   "RWS_Tarot_02_High_Priestess.jpg",
+  "empress":          "RWS_Tarot_03_Empress.jpg",
+  "emperor":          "RWS_Tarot_04_Emperor.jpg",
+  "hierophant":       "RWS_Tarot_05_Hierophant.jpg",
+  "lovers":           "RWS_Tarot_06_Lovers.jpg",
+  "chariot":          "RWS_Tarot_07_Chariot.jpg",
+  "strength":         "RWS_Tarot_08_Strength.jpg",
+  "hermit":           "RWS_Tarot_09_Hermit.jpg",
+  "wheel-of-fortune": "RWS_Tarot_10_Wheel_of_Fortune.jpg",
+  "justice":          "RWS_Tarot_11_Justice.jpg",
+  "hanged-man":       "RWS_Tarot_12_Hanged_Man.jpg",
+  "death":            "RWS_Tarot_13_Death.jpg",
+  "temperance":       "RWS_Tarot_14_Temperance.jpg",
+  "devil":            "RWS_Tarot_15_Devil.jpg",
+  "tower":            "RWS_Tarot_16_Tower.jpg",
+  "star":             "RWS_Tarot_17_Star.jpg",
+  "moon":             "RWS_Tarot_18_Moon.jpg",
+  "sun":              "RWS_Tarot_19_Sun.jpg",
+  "judgement":        "RWS_Tarot_20_Judgement.jpg",
+  "world":            "RWS_Tarot_21_World.jpg",
+};
+
+const suitPrefix: Record<string, string> = {
+  wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pents",
+};
+
+const rankNum: Record<string, string> = {
+  ace: "01", "2": "02", "3": "03", "4": "04", "5": "05",
+  "6": "06", "7": "07", "8": "08", "9": "09", "10": "10",
+  page: "11", knight: "12", queen: "13", king: "14",
+};
+
+export function cardImageUrl(card: Card): string {
+  if (majorFilenames[card.id]) return WIKIMEDIA + majorFilenames[card.id];
+  const [suit, rank] = card.id.split("-");
+  return WIKIMEDIA + suitPrefix[suit] + rankNum[rank] + ".jpg";
+}
+
 import { minorArcana } from "./minor-arcana";
 
 const majorArcana: Card[] = [

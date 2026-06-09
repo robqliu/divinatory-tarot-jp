@@ -194,15 +194,21 @@ body {
   border-bottom: 1px solid rgba(201, 149, 58, 0.2);
 }
 
-.card-number {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--accent2);
-  min-width: 2.5rem;
-  text-align: center;
-  line-height: 1;
-  text-shadow: 0 0 12px rgba(201, 149, 58, 0.4);
+.card-thumb {
+  width: 72px;
+  aspect-ratio: 2 / 3;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 149, 58, 0.3);
+  background: var(--surface2);
+  cursor: zoom-in;
+  transition: opacity 0.15s, box-shadow 0.15s;
+  display: block;
+}
+
+.card-thumb:hover {
+  opacity: 0.85;
+  box-shadow: 0 0 12px rgba(201, 149, 58, 0.4);
 }
 
 .card-name-ja {
@@ -212,6 +218,15 @@ body {
   line-height: 1.2;
 }
 
+.card-number-inline {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--accent2);
+  margin-left: 0.3em;
+  vertical-align: middle;
+}
+
 .card-name-en {
   font-family: var(--font-display);
   font-size: 0.82rem;
@@ -219,6 +234,31 @@ body {
   color: var(--text-muted);
   margin-top: 0.2rem;
   letter-spacing: 0.04em;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out;
+  backdrop-filter: blur(4px);
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox img {
+  max-height: 90dvh;
+  max-width: 90dvw;
+  border-radius: 8px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
 }
 
 /* Meaning sections */
