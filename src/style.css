@@ -121,7 +121,8 @@ body {
 }
 
 .suggestions button:hover,
-.suggestions button:focus {
+.suggestions button:focus,
+.suggestions button.active {
   background: var(--surface2);
   outline: none;
 }

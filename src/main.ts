@@ -164,11 +164,12 @@ searchEl.addEventListener("input", () => {
   suggestionsEl.innerHTML = results
     .slice(0, 6)
     .map(
-      (c) =>
-        `<li><button data-id="${c.id}">${c.name_ja} <span>${c.name}</span></button></li>`
+      (c, i) =>
+        `<li><button data-id="${c.id}" data-index="${i}">${c.name_ja} <span>${c.name}</span></button></li>`
     )
     .join("");
   suggestionsEl.hidden = false;
+  activeIndex = -1;
 
   suggestionsEl.querySelectorAll<HTMLButtonElement>("button").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -182,18 +183,35 @@ searchEl.addEventListener("input", () => {
   });
 });
 
+let activeIndex = -1;
+
+function setActive(index: number) {
+  activeIndex = index;
+  suggestionsEl.querySelectorAll<HTMLButtonElement>("button").forEach((btn) => {
+    btn.classList.toggle("active", Number(btn.dataset.index) === activeIndex);
+  });
+}
+
 searchEl.addEventListener("keydown", (e) => {
+  const total = suggestionsEl.querySelectorAll("button").length;
   if (e.key === "Escape") {
     suggestionsEl.hidden = true;
-  }
-  if (e.key === "Enter") {
-    const q = searchEl.value;
-    const results = searchCards(q);
-    if (results.length > 0) {
-      searchEl.value = "";
-      suggestionsEl.hidden = true;
-      showCard(results[0]);
-    }
+    activeIndex = -1;
+  } else if (e.key === "ArrowDown" && activeIndex < total - 1) {
+    e.preventDefault();
+    setActive(activeIndex + 1);
+  } else if (e.key === "ArrowUp" && activeIndex > -1) {
+    e.preventDefault();
+    setActive(activeIndex - 1);
+  } else if (e.key === "Enter" && !suggestionsEl.hidden) {
+    e.preventDefault();
+    const i = activeIndex >= 0 ? activeIndex : 0;
+    const target = suggestionsEl.querySelector<HTMLButtonElement>(`button[data-index="${i}"]`)!;
+    const card = cards.find((c) => c.id === target.dataset.id)!;
+    searchEl.value = "";
+    suggestionsEl.hidden = true;
+    activeIndex = -1;
+    showCard(card);
   }
 });
 
