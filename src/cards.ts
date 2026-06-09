@@ -14,7 +14,9 @@ export interface Card {
   reversed: CardMeaning;
 }
 
-export const cards: Card[] = [
+import { minorArcana } from "./minor-arcana";
+
+const majorArcana: Card[] = [
   {
     id: "fool",
     number: 0,
@@ -390,3 +392,5 @@ export const cards: Card[] = [
     },
   },
 ];
+
+export const cards: Card[] = [...majorArcana, ...minorArcana];
