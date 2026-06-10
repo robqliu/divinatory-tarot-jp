@@ -14,48 +14,110 @@ export interface Card {
   reversed: CardMeaning;
 }
 
-const WIKIMEDIA = "https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/";
+const W = "https://upload.wikimedia.org/wikipedia/commons/";
 
-const majorFilenames: Record<string, string> = {
-  "fool":             "RWS_Tarot_00_Fool.jpg",
-  "magician":         "RWS_Tarot_01_Magician.jpg",
-  "high-priestess":   "RWS_Tarot_02_High_Priestess.jpg",
-  "empress":          "RWS_Tarot_03_Empress.jpg",
-  "emperor":          "RWS_Tarot_04_Emperor.jpg",
-  "hierophant":       "RWS_Tarot_05_Hierophant.jpg",
-  "lovers":           "RWS_Tarot_06_Lovers.jpg",
-  "chariot":          "RWS_Tarot_07_Chariot.jpg",
-  "strength":         "RWS_Tarot_08_Strength.jpg",
-  "hermit":           "RWS_Tarot_09_Hermit.jpg",
-  "wheel-of-fortune": "RWS_Tarot_10_Wheel_of_Fortune.jpg",
-  "justice":          "RWS_Tarot_11_Justice.jpg",
-  "hanged-man":       "RWS_Tarot_12_Hanged_Man.jpg",
-  "death":            "RWS_Tarot_13_Death.jpg",
-  "temperance":       "RWS_Tarot_14_Temperance.jpg",
-  "devil":            "RWS_Tarot_15_Devil.jpg",
-  "tower":            "RWS_Tarot_16_Tower.jpg",
-  "star":             "RWS_Tarot_17_Star.jpg",
-  "moon":             "RWS_Tarot_18_Moon.jpg",
-  "sun":              "RWS_Tarot_19_Sun.jpg",
-  "judgement":        "RWS_Tarot_20_Judgement.jpg",
-  "world":            "RWS_Tarot_21_World.jpg",
+const imageUrls: Record<string, string> = {
+  // Major Arcana
+  "fool":             W+"9/90/RWS_Tarot_00_Fool.jpg",
+  "magician":         W+"d/de/RWS_Tarot_01_Magician.jpg",
+  "high-priestess":   W+"8/88/RWS_Tarot_02_High_Priestess.jpg",
+  "empress":          W+"d/d2/RWS_Tarot_03_Empress.jpg",
+  "emperor":          W+"c/c3/RWS_Tarot_04_Emperor.jpg",
+  "hierophant":       W+"8/8d/RWS_Tarot_05_Hierophant.jpg",
+  "lovers":           W+"d/db/RWS_Tarot_06_Lovers.jpg",
+  "chariot":          W+"9/9b/RWS_Tarot_07_Chariot.jpg",
+  "strength":         W+"f/f5/RWS_Tarot_08_Strength.jpg",
+  "hermit":           W+"4/4d/RWS_Tarot_09_Hermit.jpg",
+  "wheel-of-fortune": W+"3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg",
+  "justice":          W+"e/e0/RWS_Tarot_11_Justice.jpg",
+  "hanged-man":       W+"2/2b/RWS_Tarot_12_Hanged_Man.jpg",
+  "death":            W+"d/d7/RWS_Tarot_13_Death.jpg",
+  "temperance":       W+"f/f8/RWS_Tarot_14_Temperance.jpg",
+  "devil":            W+"5/55/RWS_Tarot_15_Devil.jpg",
+  "tower":            W+"5/53/RWS_Tarot_16_Tower.jpg",
+  "star":             W+"d/db/RWS_Tarot_17_Star.jpg",
+  "moon":             W+"7/7f/RWS_Tarot_18_Moon.jpg",
+  "sun":              W+"1/17/RWS_Tarot_19_Sun.jpg",
+  "judgement":        W+"d/dd/RWS_Tarot_20_Judgement.jpg",
+  "world":            W+"f/ff/RWS_Tarot_21_World.jpg",
+  // Wands
+  "wands-ace":    W+"1/11/Wands01.jpg",
+  "wands-2":      W+"0/0f/Wands02.jpg",
+  "wands-3":      W+"f/ff/Wands03.jpg",
+  "wands-4":      W+"a/a4/Wands04.jpg",
+  "wands-5":      W+"9/9d/Wands05.jpg",
+  "wands-6":      W+"3/3b/Wands06.jpg",
+  "wands-7":      W+"e/e4/Wands07.jpg",
+  "wands-8":      W+"6/6b/Wands08.jpg",
+  "wands-9":      W+"e/e7/Wands09.jpg",
+  "wands-10":     W+"0/0b/Wands10.jpg",
+  "wands-page":   W+"6/6a/Wands11.jpg",
+  "wands-knight": W+"1/16/Wands12.jpg",
+  "wands-queen":  W+"0/0d/Wands13.jpg",
+  "wands-king":   W+"c/ce/Wands14.jpg",
+  // Cups
+  "cups-ace":    W+"3/36/Cups01.jpg",
+  "cups-2":      W+"f/f8/Cups02.jpg",
+  "cups-3":      W+"7/7a/Cups03.jpg",
+  "cups-4":      W+"3/35/Cups04.jpg",
+  "cups-5":      W+"d/d7/Cups05.jpg",
+  "cups-6":      W+"1/17/Cups06.jpg",
+  "cups-7":      W+"a/ae/Cups07.jpg",
+  "cups-8":      W+"6/60/Cups08.jpg",
+  "cups-9":      W+"2/24/Cups09.jpg",
+  "cups-10":     W+"8/84/Cups10.jpg",
+  "cups-page":   W+"a/ad/Cups11.jpg",
+  "cups-knight": W+"f/fa/Cups12.jpg",
+  "cups-queen":  W+"6/62/Cups13.jpg",
+  "cups-king":   W+"0/04/Cups14.jpg",
+  // Swords
+  "swords-ace":    W+"1/1a/Swords01.jpg",
+  "swords-2":      W+"9/9e/Swords02.jpg",
+  "swords-3":      W+"0/02/Swords03.jpg",
+  "swords-4":      W+"b/bf/Swords04.jpg",
+  "swords-5":      W+"2/23/Swords05.jpg",
+  "swords-6":      W+"2/29/Swords06.jpg",
+  "swords-7":      W+"3/34/Swords07.jpg",
+  "swords-8":      W+"a/a7/Swords08.jpg",
+  "swords-9":      W+"2/2f/Swords09.jpg",
+  "swords-10":     W+"d/d4/Swords10.jpg",
+  "swords-page":   W+"4/4c/Swords11.jpg",
+  "swords-knight": W+"b/b0/Swords12.jpg",
+  "swords-queen":  W+"d/d4/Swords13.jpg",
+  "swords-king":   W+"3/33/Swords14.jpg",
+  // Pentacles
+  "pentacles-ace":    W+"f/fd/Pents01.jpg",
+  "pentacles-2":      W+"9/9f/Pents02.jpg",
+  "pentacles-3":      W+"4/42/Pents03.jpg",
+  "pentacles-4":      W+"3/35/Pents04.jpg",
+  "pentacles-5":      W+"9/96/Pents05.jpg",
+  "pentacles-6":      W+"a/a6/Pents06.jpg",
+  "pentacles-7":      W+"6/6a/Pents07.jpg",
+  "pentacles-8":      W+"4/49/Pents08.jpg",
+  "pentacles-9":      W+"f/f0/Pents09.jpg",
+  "pentacles-10":     W+"4/42/Pents10.jpg",
+  "pentacles-page":   W+"e/ec/Pents11.jpg",
+  "pentacles-knight": W+"d/d5/Pents12.jpg",
+  "pentacles-queen":  W+"8/88/Pents13.jpg",
+  "pentacles-king":   W+"1/1c/Pents14.jpg",
 };
 
-const suitPrefix: Record<string, string> = {
-  wands: "Wands", cups: "Cups", swords: "Swords", pentacles: "Pents",
-};
-
-const rankNum: Record<string, string> = {
-  ace: "01", "2": "02", "3": "03", "4": "04", "5": "05",
-  "6": "06", "7": "07", "8": "08", "9": "09", "10": "10",
-  page: "11", knight: "12", queen: "13", king: "14",
-};
+function toThumbUrl(fullUrl: string): string {
+  const filename = fullUrl.split("/").pop()!;
+  return fullUrl.replace("/commons/", "/commons/thumb/") + `/150px-${filename}`;
+}
 
 export function cardImageUrl(card: Card): string {
-  if (majorFilenames[card.id]) return WIKIMEDIA + majorFilenames[card.id];
-  const [suit, rank] = card.id.split("-");
-  return WIKIMEDIA + suitPrefix[suit] + rankNum[rank] + ".jpg";
+  return `/cards/${card.id}.jpg`;
 }
+
+export function cardFullUrl(card: Card): string {
+  return imageUrls[card.id];
+}
+
+export const cardThumbUrls: Record<string, string> = Object.fromEntries(
+  Object.entries(imageUrls).map(([id, url]) => [id, toThumbUrl(url)])
+);
 
 import { minorArcana } from "./minor-arcana";
 
