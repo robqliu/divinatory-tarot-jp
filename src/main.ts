@@ -274,7 +274,10 @@ function populateSuggestions(items: Card[], isHistory = false) {
   suggestionsEl.innerHTML = items.slice(0, 6).map((c, i) =>
     `<li><button data-id="${c.id}" data-index="${i}">
       ${isHistory ? `<span class="suggestion-hint">履歴</span>` : ""}
-      ${c.name_ja} <span>${c.name}</span>
+      <span class="suggestion-names">
+        <span class="suggestion-ja">${c.name_ja}</span>
+        <span class="suggestion-en">${c.name}</span>
+      </span>
     </button></li>`
   ).join("");
   suggestionsEl.hidden = false;
