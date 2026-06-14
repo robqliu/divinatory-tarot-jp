@@ -33,8 +33,8 @@ const groupLabels: Record<GroupKey, string> = {
   major:     "大アルカナ",
   wands:     "ワンド",
   cups:      "カップ",
-  swords:    "剣",
-  pentacles: "コイン",
+  swords:    "ソード",
+  pentacles: "ペンタクル",
 };
 
 const searchIndex = cards.flatMap((card) => [
