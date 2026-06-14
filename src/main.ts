@@ -21,6 +21,15 @@ function pushHistory(cardId: string) {
 
 type GroupKey = "major" | "wands" | "cups" | "swords" | "pentacles";
 
+type AppState =
+  | { mode: "card"; cardId?: string }
+  | { mode: "browse"; group: GroupKey };
+
+const State = {
+  card: (cardId?: string): AppState => ({ mode: "card", cardId }),
+  browse: (group: GroupKey): AppState => ({ mode: "browse", group }),
+};
+
 const groups: Record<GroupKey, Card[]> = {
   major:     cards.filter(c => c.number !== null),
   wands:     cards.filter(c => c.id.startsWith("wands-")),
@@ -191,22 +200,47 @@ function showBrowseGroup(group: GroupKey) {
   browseGridEl.querySelectorAll<HTMLButtonElement>(".browse-card").forEach(btn => {
     btn.addEventListener("click", () => {
       const card = cards.find(c => c.id === btn.dataset.id);
-      if (card) { showCard(card); showView("card"); }
+      if (card) applyState(State.card(card.id));
     });
   });
 }
 
 browseTabsEl.addEventListener("click", (e) => {
   const btn = (e.target as Element).closest<HTMLButtonElement>(".browse-tab");
-  if (btn?.dataset.group) showBrowseGroup(btn.dataset.group as GroupKey);
+  if (btn?.dataset.group) {
+    const group = btn.dataset.group as GroupKey;
+    history.replaceState(State.browse(group), "");
+    showBrowseGroup(group);
+  }
 });
 
-navSearchBtn.addEventListener("click", () => showView("card"));
-navBrowseBtn.addEventListener("click", () => { showView("browse"); showBrowseGroup(currentGroup); });
+navSearchBtn.addEventListener("click", () => applyState(State.card()));
+navBrowseBtn.addEventListener("click", () => applyState(State.browse(currentGroup)));
 navBrowseDesktop.addEventListener("click", () => {
-  if (currentMode === "browse") showView("card");
-  else { showView("browse"); showBrowseGroup(currentGroup); }
+  if (currentMode === "browse") applyState(State.card());
+  else applyState(State.browse(currentGroup));
 });
+
+function applyState(state: AppState, pushToHistory = true) {
+  if (pushToHistory) history.pushState(state, "");
+  if (state.mode === "browse") {
+    showView("browse");
+    showBrowseGroup(state.group);
+  } else {
+    showView("card");
+    if (state.cardId) {
+      const card = cards.find(c => c.id === state.cardId);
+      if (card) showCard(card, pushToHistory);
+    }
+  }
+}
+
+window.addEventListener("popstate", (e) => {
+  const state = e.state as AppState | null;
+  if (state) applyState(state, false);
+});
+
+history.replaceState(State.card(), "");
 
 // ── Card display ──────────────────────────────────────────────────────────────
 
@@ -252,8 +286,7 @@ function populateSuggestions(items: Card[], isHistory = false) {
       if (card) {
         searchEl.value = "";
         suggestionsEl.hidden = true;
-        showCard(card);
-        showView("card");
+        applyState(State.card(card.id));
       }
     });
   });
@@ -304,8 +337,7 @@ searchEl.addEventListener("keydown", (e) => {
     searchEl.value = "";
     suggestionsEl.hidden = true;
     activeIndex = -1;
-    showCard(card);
-    showView("card");
+    applyState(State.card(card.id));
   }
 });
 
